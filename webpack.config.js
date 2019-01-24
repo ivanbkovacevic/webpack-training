@@ -7,7 +7,10 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  mode:'production',
+  devtool: "inline-source-map", 
   module: {
+  
     rules: [
       {
         test: /\.(js|jsx)$/,
@@ -16,11 +19,17 @@ const config = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [{
+          loader: "style-loader"
+      }, {
+          loader: "css-loader", options: {
+              sourceMap: true
+          }
+      }, {
+          loader: "sass-loader", options: {
+              sourceMap: true
+          }
+      }]
       },
       {
         test: /\.css$/,
@@ -43,6 +52,12 @@ const config = {
             }
           }
         ]
+      },
+      {
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre",
+        
       }
     ]
   },
