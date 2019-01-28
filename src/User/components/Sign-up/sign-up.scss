@@ -1,0 +1,16 @@
+.sign-up{
+    box-shadow: 1px 1px 1px 1px $blue;
+    .my-form{
+        @include my-form($blue)
+      } 
+    h1{
+        color:$blue;
+    }
+
+    .myBtn{
+        margin-left: 40%;
+        border: none;
+        outline: none;
+        background: $blue;
+    }
+}

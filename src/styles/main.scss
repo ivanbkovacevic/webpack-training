@@ -1,0 +1,7 @@
+@import '~bootstrap/scss/bootstrap.scss';
+@import 'variables';
+@import 'mixins';
+@import 'test';
+@import '../User/components/Log-in/login.scss';
+@import '../User/components/Forgoten-password/forgoten-password.scss';
+@import '../User/components/Sign-up/sign-up.scss';
