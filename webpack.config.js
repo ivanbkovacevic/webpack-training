@@ -39,8 +39,6 @@ const config = {
           'postcss-loader'
         ]
       },
-
-
       {
         test: /\.svg$/,
         use: 'file-loader'
