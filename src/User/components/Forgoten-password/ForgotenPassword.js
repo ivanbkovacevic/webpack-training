@@ -52,7 +52,7 @@ class ForgotenPassword extends Component {
                            emailValid={this.state.emailValid}
                          />
                     <button type="submit" className="btn btn-primary myBtn"
-                    disabled={this.state.emailValid ? false : true} >Posalji</button>
+                    disabled={!this.state.emailValid} >Posalji</button>
                 </form>
             </div>
         );

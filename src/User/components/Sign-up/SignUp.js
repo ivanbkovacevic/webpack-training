@@ -6,7 +6,7 @@ class SignUp extends Component {
     state={
         userData:{
             firstName:'',
-            secondName:'',
+            lastName:'',
             userName:'',
             email:'',
             password:'',
@@ -14,27 +14,81 @@ class SignUp extends Component {
         },
         validation:{
             firstName:false,
-            secondName:false,
+            lastName:false,
             userName:false,
             email:false,
             password:false,
             password2:false,
+            submit:false
         }
     }
 
     handleChange=(event)=> {
         const name = event.target.name;
         let userData={};
+        let validation={};
         userData={...this.state.userData};
+        validation={...this.state.validation};
         userData[name]=event.target.value;
-        console.log(userData)
-       this.setState({ userData});
+        console.log(userData,validation)
+// #############email###########
+        if(name==='email'){
+            let emailPattern=/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/;
+            let email = event.target.value;
+            let emailValid=emailPattern.test(email);
+            validation.email=emailValid;
+            if(emailValid){
+                this.setState({ userData,validation});
+            }
+          
+        }else if(name==='firstName'){ //firstName
+                if(event.target.value.length>3){
+                    validation.firstName=true;
+                    this.setState({ userData,validation});
+                }
+        }else if(name==='lastName'){ // lastName
+            if(event.target.value.length>3){
+                validation.lastName=true;
+         
+                this.setState({ userData,validation});
+            }
+    }else if(name==='userName'){ // userName
+        if(event.target.value.length>3){
+            validation.userName=true;
+        
+            this.setState({ userData,validation});
+        }
+}else if(name==='password'){ // password
+    if(event.target.value.length>7){
+        validation.password=true;
+      
+        this.setState({ userData,validation});
+    }
+}else if(name==='password2'){    // password
+    if(userData.password===event.target.value){
+        validation.password2=true;
+        this.setState({ userData,validation});
+    }
+}{
+}
+
+let okToSubmit;
+for(let i in validation){ // checking is everything valid for submiting
+   if(validation[i]===true){
+     okToSubmit=true;
+   }else{
+       okToSubmit=false;
+   }
+   validation.submit=okToSubmit;
+   this.setState({validation});
+}   
       }
 
-    handleSubmit=(e)=> {
+    handleSubmit=(e)=> { // submit and send data
         e.preventDefault();
-        alert('The value is: ' + this.state.userName + ' ' +this.state.password);
-        this.setState({[name]:event.target.value});
+      
+        this.setState({userData,validation});
+        console.log(this.state)
 
         axios.post('https://jsonplaceholder.typicode.com/posts', 
             this.state
@@ -46,10 +100,24 @@ class SignUp extends Component {
             console.log(error);
           });
 
-        this.setState({ 
-            userName: '',
-            password: '',
-        })
+   this.setState({       // reseting form
+                userData:{
+                firstName:'',
+                lastName:'',
+                userName:'',
+                email:'',
+                password:'',
+                password2:'',
+            },
+            validation:{
+                firstName:false,
+                lastName:false,
+                userName:false,
+                email:false,
+                password:false,
+                password2:false,
+                submit:false
+            }})
       }
 
     render() {
@@ -69,8 +137,8 @@ class SignUp extends Component {
                      <Input title= {'Prezime'} 
                            type="text"
                            placeholder={'Enter your second name'}
-                           name="secondName"
-                           id="secondName"
+                           name="lastName"
+                           id="lastName"
                            value={this.state.secondName}
                            handleChange={this.handleChange}
                         
@@ -109,10 +177,9 @@ class SignUp extends Component {
                            id="password2"
                            value={this.state.password2}
                            handleChange={this.handleChange}
-                          
-                     />
-                    
-                    <button type="submit" class="btn btn-primary myBtn">Uloguj se</button>
+                     />              
+                    <button type="submit" class="btn btn-primary myBtn"
+                    disabled={!this.state.validation.submit}>Uloguj se</button>
              </form>
             </div>
         );
