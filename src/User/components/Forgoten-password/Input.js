@@ -2,25 +2,24 @@ import React from 'react';
 
  const Input =(props) => {
     let valid='d-none';
-    if(props.value.length>1){
-        if(props.value.length<5 || props.value.length>15){
+    if(!props.emailValid){
             valid='';
        }else{
            valid='d-none';
        }
-    }
 
   return (
-    <div className="form-group">
-                        <label htmlFor="user-name">{props.title}</label>
-                        <input type={props.type} className="form-control" id="user-name"
+    <div class="form-group">
+                        <label htmlFor="email">{props.title}</label>
+                        <input type={props.type} className="form-control" id="email"
                         onChange={props.handleChange}
                         value={props.value}
                         name={props.name}
                         placeholder={props.placeholder}>
                         </input>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                          <div className={`${valid} text-danger small`}>
-                           {`* ${props.title} mora da bude izmedju 5 i 15 karaktera.`}
+                           {`* ${props.title} je neodgovarajuca`}
                          </div>
                     </div>
   )
