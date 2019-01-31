@@ -16,10 +16,24 @@ class SignUp extends Component {
             firstName:false,
             lastName:false,
             userName:false,
-            email:false,
+            email:false, 
             password:false,
             password2:false,
-            submit:false
+            submit:false   
+            },
+        validationText:{
+            firstNameMsg:'',
+            firstNameClass:'',
+            lastNameMsg:'',
+            lastNameClass:'',
+            userNameMsg:'',
+            userNameClass:'',
+            emailMsg:'',
+            emailClass:'',
+            passwordMsg:'',
+            passwordClass:'',
+            password2Msg:'',
+            password2Class:''
         }
     }
 
@@ -27,10 +41,13 @@ class SignUp extends Component {
         const name = event.target.name;
         let userData={};
         let validation={};
+        let validationText={};
         userData={...this.state.userData};
         validation={...this.state.validation};
+        validationText={...this.state.validationText};
         userData[name]=event.target.value;
         console.log(userData,validation)
+        this.setState({ userData});
 // #############email###########
         if(name==='email'){
             let emailPattern=/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/;
@@ -38,37 +55,77 @@ class SignUp extends Component {
             let emailValid=emailPattern.test(email);
             validation.email=emailValid;
             if(emailValid){
-                this.setState({ userData,validation});
+                validation.email=true;
+                validationText.emailMsg="OK je";
+                validationText.emailClass="is-valid";
+                this.setState({ validation,validationText});
+            }else{
+                    validation.email=false;
+                    validationText.emailMsg="Email adresa mora da bude odgovarajuca";
+                    validationText.emailClass="is-invalid";
+                    this.setState({ validation,validationText});
             }
           
         }else if(name==='firstName'){ //firstName
-                if(event.target.value.length>3){
+                if(event.target.value.length>2){
                     validation.firstName=true;
-                    this.setState({ userData,validation});
+                    validationText.firstNameMsg="OK je";
+                    validationText.firstNameClass="is-valid";
+                    this.setState({ validation,validationText});
+                }else{
+                    validation.firstName=false;
+                    validationText.firstNameMsg="Ime mora da bude minimum 3 slova";
+                    validationText.firstNameClass="is-invalid";
+                    this.setState({ validation,validationText});
                 }
         }else if(name==='lastName'){ // lastName
             if(event.target.value.length>3){
                 validation.lastName=true;
-         
-                this.setState({ userData,validation});
+                validationText.lastNameMsg="OK je";
+                validationText.lastNameClass="is-valid";
+                this.setState({ validation,validationText});
+            }else{
+                   validation.lastName=false;
+                    validationText.lastNameMsg="Prezime mora da bude minimum 3 slova";
+                    validationText.lastNameClass="is-invalid";
+                    this.setState({ validation,validationText});
             }
-    }else if(name==='userName'){ // userName
-        if(event.target.value.length>3){
-            validation.userName=true;
-        
-            this.setState({ userData,validation});
+        }else if(name==='userName'){ // userName
+            if(event.target.value.length>2){
+                validation.userName=true;
+                validationText.userNameMsg="OK je";
+                validationText.userNameClass="is-valid";
+                this.setState({ validation,validationText});
+        }else{
+            validation.userName=false;
+            validationText.userNameMsg="Username mora da bude minimum 3 slova";
+            validationText.userNameClass="is-invalid";
+            this.setState({ validation,validationText});
         }
-}else if(name==='password'){ // password
-    if(event.target.value.length>7){
-        validation.password=true;
-      
-        this.setState({ userData,validation});
-    }
-}else if(name==='password2'){    // password
-    if(userData.password===event.target.value){
-        validation.password2=true;
-        this.setState({ userData,validation});
-    }
+        }else if(name==='password'){ // password
+           if(event.target.value.length>5){
+            validation.password=true;
+            validationText.passwordMsg="OK je";
+            validationText.passwordClass="is-valid";
+            this.setState({ validation,validationText});
+         }else{
+            validation.password=false;
+            validationText.passwordMsg="Sifra mora da bude minimum 6 karaktera";
+            validationText.passwordClass="is-invalid";
+            this.setState({ validation,validationText});
+         }
+        }else if(name==='password2'){    // password
+            if(userData.password===event.target.value){
+                validation.password2=true;
+                validationText.password2Msg="OK je";
+                validationText.password2Class="is-valid";
+                this.setState({ validation,validationText});
+            }else{
+                validation.password2=false;
+                validationText.password2Msg="Sifre mora da odgovaraju jedna drugoj";
+                validationText.password2Class="is-invalid";
+                this.setState({ validation,validationText});
+            }
 }{
 }
 
@@ -101,23 +158,37 @@ for(let i in validation){ // checking is everything valid for submiting
           });
 
    this.setState({       // reseting form
-                userData:{
-                firstName:'',
-                lastName:'',
-                userName:'',
-                email:'',
-                password:'',
-                password2:'',
-            },
-            validation:{
-                firstName:false,
-                lastName:false,
-                userName:false,
-                email:false,
-                password:false,
-                password2:false,
-                submit:false
-            }})
+    userData:{
+        firstName:'',
+        lastName:'',
+        userName:'',
+        email:'',
+        password:'',
+        password2:'',
+    },
+    validation:{
+        firstName:false,
+        lastName:false,
+        userName:false,
+        email:false, 
+        password:false,
+        password2:false,
+        submit:false   
+        },
+    validationText:{
+        firstNameMsg:'',
+        firstNameClass:'',
+        lastNameMsg:'',
+        lastNameClass:'',
+        userNameMsg:'',
+        userNameClass:'',
+        emailMsg:'',
+        emailClass:'',
+        passwordMsg:'',
+        passwordClass:'',
+        password2Msg:'',
+        password2Class:''
+    }})
       }
 
     render() {
@@ -130,6 +201,9 @@ for(let i in validation){ // checking is everything valid for submiting
                            placeholder={'Enter your name'}
                            name="firstName"
                            id="firstName"
+                           class={this.state.validationText.firstNameClass}
+                           message={this.state.validationText.firstNameMsg}
+                        //    messageClass={this.state.validation.firstNameClass}
                            value={this.state.firstName}
                            handleChange={this.handleChange}
                           
@@ -140,6 +214,9 @@ for(let i in validation){ // checking is everything valid for submiting
                            name="lastName"
                            id="lastName"
                            value={this.state.secondName}
+                           class={this.state.validationText.lastNameClass}
+                           message={this.state.validationText.lastNameMsg}
+                        //    messageClass={this.state.validation.lastName ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                         
                      />
@@ -149,8 +226,11 @@ for(let i in validation){ // checking is everything valid for submiting
                            name="userName"
                            id="userName"
                            value={this.state.userName}
+                           class={this.state.validationText.userNameClass}
+                           message={this.state.validationText.userNameMsg}
+                        //    messageClass={this.state.validation.userName ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
-                           emailValid={this.state.emailValid}
+                          
                      />
                      <Input title= {'Email'} 
                            type="text"
@@ -158,8 +238,11 @@ for(let i in validation){ // checking is everything valid for submiting
                            name="email"
                            id="email"
                            value={this.state.email}
+                           class={this.state.validationText.emailClass}
+                           message={this.state.validationText.emailMsg}
+                        //    messageClass={this.state.validation.email ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
-                           emailValid={this.state.emailValid}
+                        
                      />
                         <Input title= {'Password'} 
                            type="password"
@@ -167,6 +250,9 @@ for(let i in validation){ // checking is everything valid for submiting
                            name="password"
                            id="password"
                            value={this.state.password}
+                           class={this.state.validationText.passwordClass}
+                           message={this.state.validationText.passwordMsg}
+                        //    messageClass={this.state.validation.password ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                           
                      />
@@ -176,10 +262,13 @@ for(let i in validation){ // checking is everything valid for submiting
                            name="password2"
                            id="password2"
                            value={this.state.password2}
+                           class={this.state.validationText.password2Class}
+                           message={this.state.validationText.password2Msg}
+                        //    messageClass={this.state.validation.password2 ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                      />              
                     <button type="submit" class="btn btn-primary myBtn"
-                    disabled={!this.state.validation.submit}>Uloguj se</button>
+                    disabled={!this.state.validation.submit}>Registruj se</button>
              </form>
             </div>
         );
