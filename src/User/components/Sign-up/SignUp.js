@@ -11,6 +11,7 @@ class SignUp extends Component {
             email:'',
             password:'',
             password2:'',
+            isCoach:false
         },
         validation:{
             firstName:false,
@@ -33,7 +34,8 @@ class SignUp extends Component {
             passwordMsg:'',
             passwordClass:'',
             password2Msg:'',
-            password2Class:''
+            password2Class:'',
+            isCoachClass:'isCoach'
         }
     }
 
@@ -45,9 +47,9 @@ class SignUp extends Component {
         userData={...this.state.userData};
         validation={...this.state.validation};
         validationText={...this.state.validationText};
-        userData[name]=event.target.value;
-        console.log(userData,validation)
-        this.setState({ userData});
+      //  userData[name]=event.target.value;
+       // console.log(userData,validation)
+       // this.setState({ userData});
 // #############email###########
         if(name==='email'){
             let emailPattern=/^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/;
@@ -58,7 +60,8 @@ class SignUp extends Component {
                 validation.email=true;
                 validationText.emailMsg="OK je";
                 validationText.emailClass="is-valid";
-                this.setState({ validation,validationText});
+                userData.email=event.target.value;
+                this.setState({userData,validation,validationText});
             }else{
                     validation.email=false;
                     validationText.emailMsg="Email adresa mora da bude odgovarajuca";
@@ -71,7 +74,8 @@ class SignUp extends Component {
                     validation.firstName=true;
                     validationText.firstNameMsg="OK je";
                     validationText.firstNameClass="is-valid";
-                    this.setState({ validation,validationText});
+                    userData.firstName=event.target.value;
+                    this.setState({userData,validation,validationText});
                 }else{
                     validation.firstName=false;
                     validationText.firstNameMsg="Ime mora da bude minimum 3 slova";
@@ -83,7 +87,8 @@ class SignUp extends Component {
                 validation.lastName=true;
                 validationText.lastNameMsg="OK je";
                 validationText.lastNameClass="is-valid";
-                this.setState({ validation,validationText});
+                userData.lastName=event.target.value;
+                this.setState({userData,validation,validationText});
             }else{
                    validation.lastName=false;
                     validationText.lastNameMsg="Prezime mora da bude minimum 3 slova";
@@ -95,7 +100,8 @@ class SignUp extends Component {
                 validation.userName=true;
                 validationText.userNameMsg="OK je";
                 validationText.userNameClass="is-valid";
-                this.setState({ validation,validationText});
+                userData.userName=event.target.value;
+                this.setState({userData,validation,validationText});
         }else{
             validation.userName=false;
             validationText.userNameMsg="Username mora da bude minimum 3 slova";
@@ -107,7 +113,8 @@ class SignUp extends Component {
             validation.password=true;
             validationText.passwordMsg="OK je";
             validationText.passwordClass="is-valid";
-            this.setState({ validation,validationText});
+            userData.password=event.target.value;
+                this.setState({userData,validation,validationText});
          }else{
             validation.password=false;
             validationText.passwordMsg="Sifra mora da bude minimum 6 karaktera";
@@ -119,15 +126,25 @@ class SignUp extends Component {
                 validation.password2=true;
                 validationText.password2Msg="OK je";
                 validationText.password2Class="is-valid";
-                this.setState({ validation,validationText});
+                userData.password2=event.target.value;
+                this.setState({userData,validation,validationText});
             }else{
                 validation.password2=false;
                 validationText.password2Msg="Sifre mora da odgovaraju jedna drugoj";
                 validationText.password2Class="is-invalid";
-                this.setState({ validation,validationText});
+                this.setState({ validation,validationText});    
+           } 
+          }else if(name==='isCoach'){
+              if(event.target.checked){
+                userData.isCoach=true;
+                this.setState({userData,validationText});
+              }else{
+                userData.isCoach=false;
+                this.setState({userData});
+              }
+              
             }
-}{
-}
+        
 
 let okToSubmit;
 for(let i in validation){ // checking is everything valid for submiting
@@ -165,6 +182,7 @@ for(let i in validation){ // checking is everything valid for submiting
         email:'',
         password:'',
         password2:'',
+        isCoach:false
     },
     validation:{
         firstName:false,
@@ -187,7 +205,9 @@ for(let i in validation){ // checking is everything valid for submiting
         passwordMsg:'',
         passwordClass:'',
         password2Msg:'',
-        password2Class:''
+        password2Class:'',
+        isCoachClass:'isCoach'
+
     }})
       }
 
@@ -266,7 +286,18 @@ for(let i in validation){ // checking is everything valid for submiting
                            message={this.state.validationText.password2Msg}
                         //    messageClass={this.state.validation.password2 ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
-                     />              
+                     />    
+                      <Input title= {'Sign up as a coach'} 
+                           type="checkbox"
+                           placeholder={''}
+                           name="isCoach"
+                           id="isCoach"
+                           value='yeshhhh'
+                           class={this.state.validationText.isCoachClass}
+                        //   message={this.state.validationText.password2Msg}
+                        //    messageClass={this.state.validation.password2 ?  "valid-feedback" : "invalid-feedback" }
+                           handleChange={this.handleChange}
+                     />                        
                     <button type="submit" class="btn btn-primary myBtn"
                     disabled={!this.state.validation.submit}>Registruj se</button>
              </form>

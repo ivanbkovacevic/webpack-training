@@ -5,7 +5,7 @@ import React from 'react';
 
   return (
     <div className="form-group">
-                <label htmlFor="user-name">{props.title}</label>
+                <label className={props.class} htmlFor="user-name">{props.title}</label>
                 <input type={props.type} 
                 className={`form-control  ${props.class}`}
                 id={props.id}
