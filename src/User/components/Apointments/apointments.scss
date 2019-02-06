@@ -1,0 +1,18 @@
+.apointments{
+    box-shadow: 1px 1px 1px 1px $orange;
+    .my-form{
+        @include my-form($orange)
+
+        
+      } 
+    h1{
+        color:$orange;
+    }
+
+    .myBtn{
+        margin-left: 40%;
+        border: none;
+        outline: none;
+        background: $orange;
+    }
+}

@@ -15,7 +15,20 @@
         outline: none;
         background: $blue;
     }
-    .isCoach{
-        color: aqua;
+   
+   .isCoach input{
+    display: none;
+   }
+
+    [type=checkbox]:after {
+        display: inline-block;
+        content: '\2714';
+        position: absolute;
+        left: 50%;
+        background-color: #ccc;
+
     }
+
+  
+
 }

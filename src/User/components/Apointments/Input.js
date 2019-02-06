@@ -1,7 +1,6 @@
 import React from 'react';
 
  const Input =(props) => {
-  let isValidNeutral='';
 
   return (
     <div className="form-group">
@@ -12,11 +11,12 @@ import React from 'react';
                 onChange={props.handleChange}
                 value={props.value}
                 name={props.name}
+                required
                 placeholder={props.placeholder}>
                 </input>
-                  <div className={props.messageClass}>
+                  {/* <div className={props.messageClass}>
                      {props.message}
-                  </div>
+                  </div> */}
                     </div>
   )
 }

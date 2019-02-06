@@ -9,7 +9,7 @@ import React from 'react';
        }
 
   return (
-    <div class="form-group">
+    <div className="form-group">
                         <label htmlFor="email">{props.title}</label>
                         <input type={props.type} className="form-control" id="email"
                         onChange={props.handleChange}
@@ -17,7 +17,7 @@ import React from 'react';
                         name={props.name}
                         placeholder={props.placeholder}>
                         </input>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                          <div className={`${valid} text-danger small`}>
                            {`* ${props.title} je neodgovarajuca`}
                          </div>

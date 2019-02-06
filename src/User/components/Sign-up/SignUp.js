@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
+import CheckBox from './CheckBox';
 import axios from 'axios';
 
 class SignUp extends Component {
@@ -289,16 +290,14 @@ for(let i in validation){ // checking is everything valid for submiting
                      />    
                       <Input title= {'Sign up as a coach'} 
                            type="checkbox"
-                           placeholder={''}
                            name="isCoach"
                            id="isCoach"
-                           value='yeshhhh'
-                           class={this.state.validationText.isCoachClass}
-                        //   message={this.state.validationText.password2Msg}
-                        //    messageClass={this.state.validation.password2 ?  "valid-feedback" : "invalid-feedback" }
+                           value="yes"
+                           clas={this.state.validationText.isCoachClass}
+                     
                            handleChange={this.handleChange}
                      />                        
-                    <button type="submit" class="btn btn-primary myBtn"
+                    <button type="submit" className="btn btn-primary myBtn"
                     disabled={!this.state.validation.submit}>Registruj se</button>
              </form>
             </div>
