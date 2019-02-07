@@ -15,8 +15,8 @@ class App extends Component {
         return (  
                 <div>      
                    {/* <LogIn/>
-                   <ForgotenPassword/>
-                   <SignUp/> */}
+                   <ForgotenPassword/> */}
+                   <SignUp/>
                    <Apointments/>
                 </div>
         );

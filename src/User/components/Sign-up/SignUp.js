@@ -224,7 +224,6 @@ for(let i in validation){ // checking is everything valid for submiting
                            id="firstName"
                            class={this.state.validationText.firstNameClass}
                            message={this.state.validationText.firstNameMsg}
-                        //    messageClass={this.state.validation.firstNameClass}
                            value={this.state.firstName}
                            handleChange={this.handleChange}
                           
@@ -237,7 +236,6 @@ for(let i in validation){ // checking is everything valid for submiting
                            value={this.state.secondName}
                            class={this.state.validationText.lastNameClass}
                            message={this.state.validationText.lastNameMsg}
-                        //    messageClass={this.state.validation.lastName ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                         
                      />
@@ -249,7 +247,6 @@ for(let i in validation){ // checking is everything valid for submiting
                            value={this.state.userName}
                            class={this.state.validationText.userNameClass}
                            message={this.state.validationText.userNameMsg}
-                        //    messageClass={this.state.validation.userName ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                           
                      />
@@ -261,7 +258,6 @@ for(let i in validation){ // checking is everything valid for submiting
                            value={this.state.email}
                            class={this.state.validationText.emailClass}
                            message={this.state.validationText.emailMsg}
-                        //    messageClass={this.state.validation.email ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                         
                      />
@@ -273,7 +269,6 @@ for(let i in validation){ // checking is everything valid for submiting
                            value={this.state.password}
                            class={this.state.validationText.passwordClass}
                            message={this.state.validationText.passwordMsg}
-                        //    messageClass={this.state.validation.password ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                           
                      />
@@ -285,18 +280,12 @@ for(let i in validation){ // checking is everything valid for submiting
                            value={this.state.password2}
                            class={this.state.validationText.password2Class}
                            message={this.state.validationText.password2Msg}
-                        //    messageClass={this.state.validation.password2 ?  "valid-feedback" : "invalid-feedback" }
                            handleChange={this.handleChange}
                      />    
-                      <Input title= {'Sign up as a coach'} 
-                           type="checkbox"
-                           name="isCoach"
-                           id="isCoach"
-                           value="yes"
-                           clas={this.state.validationText.isCoachClass}
-                     
-                           handleChange={this.handleChange}
-                     />                        
+                
+                     <CheckBox
+                      handleChange={this.handleChange}/>     
+
                     <button type="submit" className="btn btn-primary myBtn"
                     disabled={!this.state.validation.submit}>Registruj se</button>
              </form>

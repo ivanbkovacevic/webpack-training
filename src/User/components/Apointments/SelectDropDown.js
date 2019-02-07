@@ -17,14 +17,9 @@ import React from 'react';
                 
                 </select>
               
-              
-              
-               
-           
-                  {/* <div className={props.messageClass}>
-                     {props.message}
-                  </div> */}
                     </div>
+
+
   )
 }
 
